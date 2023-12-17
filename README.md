@@ -1,5 +1,5 @@
 # analysis_CHIP
-## Step 1: download data from Zenedo
+## Step 1: Download data from Zenedo
 There are two directories [Analysis.tgz](https://zenodo.org/records/4277001/files/Analysis.tgz?download=1) and [SetupFiles.tgz](https://zenodo.org/records/4277001/files/SetupFiles.tgz?download=1).
 
 It takes ~ 8 hours to download the first directory (18.6GB) it and unfortunately I don't have right to download a portion of it.
@@ -17,3 +17,13 @@ C009.1995.tagAlign.gz C010.1913.tagAlign.gz
 H001.1.tagAlign.gz H002.1.tagAlign.gz H003.1.tagAlign.gz H004.1.tagAlign.gz H005.1.tagAlign.gz
 H006.1.tagAlign.gz H007.1.tagAlign.gz H008.1.tagAlign.gz H009.1.tagAlign.gz H010.1.tagAlign.gz
 ```
+## Step 3: Peak calling by MACS3.
+
+The first attempt resulted in 0 peak and the following warning messages:
+```
+WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 MACS3 needs at least 100 paired peaks at + and - strand to build the model, but can only find 0! Please make your MFOLD range broader and try again. If MACS3 still can't build the model, we suggest to use --nomodel and --extsize 147 or other fixed number instead. 
+WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 Process for pairing-model is terminated!
+```
+I followed the issue [#353](https://github.com/macs3-project/MACS/issues/353) by adding options as "--nomodel --extsize 200" to get results.
+
+All the results from this step is uploaded in the folder `peak calling`.
