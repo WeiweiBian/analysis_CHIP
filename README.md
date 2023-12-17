@@ -2,7 +2,7 @@
 ## Step 1: Download data from Zenedo
 There are two directories [Analysis.tgz](https://zenodo.org/records/4277001/files/Analysis.tgz?download=1) and [SetupFiles.tgz](https://zenodo.org/records/4277001/files/SetupFiles.tgz?download=1).
 
-It takes ~ 8 hours to download the first directory (18.6GB) and unfortunately, I don't have the right to download a portion of it.
+It takes ~ 10 hours to download the first directory (18.6GB) and unfortunately, I don't have the right to download a portion of it.
 
 ## Step 2: Select 10 colorectal cancer patients and 10 healthy controls for peak calling using MACS3.
 Following the repository of [MACS](https://github.com/macs3-project/MACS), I installed the latest MACS3 supported by Python version of 3.12.1. I ran the analysis on my Macbook locally with version 12.6 and an Intel chip.
@@ -35,3 +35,6 @@ I deleted the notes in test_peaks.xls and the headers like chr, start, end, etc 
 `cat test_peaks.txt | cut -f 1-3 | sort -k1,1 -k2,2n | bedtools merge -i - > merged.bed` to generate a merged bed file. 
 
 The merged bed file is uploaded here, however, there are no overlaps in the peak calling results, therefore the peaks are not collapsed.
+
+## Step 5: Differential peaks between CRC patients and healthy controls.
+Among the files in the two directories, I only found the BED files instead of the bam files. In the read_counts_bam.csv file, we only have read counts in sample level instead of peak level. I am sorry that I could not complete the differential peaks or volcano plots.
