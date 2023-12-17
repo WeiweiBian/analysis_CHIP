@@ -21,11 +21,16 @@ H006.1.tagAlign.gz H007.1.tagAlign.gz H008.1.tagAlign.gz H009.1.tagAlign.gz H010
 
 The first attempt resulted in 0 peaks and the following warning messages:
 ```
-WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 MACS3 needs at least 100 paired peaks at + and - strand to
-build the model, but can only find 0! Please make your MFOLD range broader and try again. If MACS3 still
-can't build the model, we suggest to use --nomodel and --extsize 147 or other fixed number instead.
+WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 MACS3 needs at least 100 paired peaks at
++ and - strand to build the model, but can only find 0! Please make your MFOLD range broader and try again. If MACS3 still can't build the model, we suggest to use --nomodel and --extsize 147 or other fixed number instead.
 WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 Process for pairing-model is terminated!
 ```
 I followed the issue [#353](https://github.com/macs3-project/MACS/issues/353) by adding options as "--nomodel --extsize 200" to get results.
 
 All the results from this step are uploaded in the folder `peak calling`.
+
+## Step 4: Merge peaks.
+
+I deleted the notes in test_peaks.xls and the headers like chr, start, end, etc. I used command `cat test_peaks.txt | cut -f 1-3 | sort -k1,1 -k2,2n | bedtools merge -i - > merged.bed` to generate a merged bed file. 
+
+The merged bed file is uploaded here, however, there are no overlaps in the peak calling results, therefore the peaks are not collapsed.
