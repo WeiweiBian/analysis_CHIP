@@ -31,6 +31,7 @@ All the results from this step are uploaded in the folder `peak calling`.
 
 ## Step 4: Merge peaks.
 
-I deleted the notes in test_peaks.xls and the headers like chr, start, end, etc. I used command `cat test_peaks.txt | cut -f 1-3 | sort -k1,1 -k2,2n | bedtools merge -i - > merged.bed` to generate a merged bed file. 
+I deleted the notes in test_peaks.xls and the headers like chr, start, end, etc to generate a text file named test_peak.txt. I used the command 
+`cat test_peaks.txt | cut -f 1-3 | sort -k1,1 -k2,2n | bedtools merge -i - > merged.bed` to generate a merged bed file. 
 
 The merged bed file is uploaded here, however, there are no overlaps in the peak calling results, therefore the peaks are not collapsed.
