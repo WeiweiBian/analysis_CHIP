@@ -5,7 +5,7 @@ There are two directories [Analysis.tgz](https://zenodo.org/records/4277001/file
 It takes ~ 10 hours to download the first directory (18.6GB) and unfortunately, I don't have the right to download a portion of it.
 
 ## Step 2: Select 10 colorectal cancer patients and 10 healthy controls for peak calling using MACS3.
-Following the repository of [MACS](https://github.com/macs3-project/MACS), I installed the latest MACS3 supported by Python version of 3.12.1. I ran the analysis on my Macbook locally with version 12.6 and an Intel chip.
+Following the repository of [MACS](https://github.com/macs3-project/MACS), I installed the latest MACS3 supported by Python version 3.12.1. I ran the analysis on my Macbook locally with version 12.6 Monterey and an Intel chip.
 
 I selected the first 10 CRC patients and 10 healthy controls for analysis. The selected samples are listed below:
 ```
@@ -18,6 +18,12 @@ H001.1.tagAlign.gz H002.1.tagAlign.gz H003.1.tagAlign.gz H004.1.tagAlign.gz H005
 H006.1.tagAlign.gz H007.1.tagAlign.gz H008.1.tagAlign.gz H009.1.tagAlign.gz H010.1.tagAlign.gz
 ```
 ## Step 3: Peak calling by MACS3.
+
+I used the histone peak-calling function from MACS
+
+```
+macs3 callpeak -t ChIP.bam -c Control.bam --broad -g hs --broad-cutoff 0.1
+```
 
 The first attempt resulted in 0 peaks and the following warning messages:
 ```
