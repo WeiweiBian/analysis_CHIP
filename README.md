@@ -19,10 +19,10 @@ H006.1.tagAlign.gz H007.1.tagAlign.gz H008.1.tagAlign.gz H009.1.tagAlign.gz H010
 ```
 ## Step 3: Peak calling by MACS3.
 
-I used the histone peak-calling function from MACS
+I used the histone peak-calling mode from [MACS](https://github.com/macs3-project/MACS), the following code is for sample CRC1:
 
 ```
-macs3 callpeak -t ChIP.bam -c Control.bam --broad -g hs --broad-cutoff 0.1
+macs3 callpeak -f BED -t C001.2746.tagAlign.gz --broad -g hs -n c1 --broad-cutoff 0.1
 ```
 
 The first attempt resulted in 0 peaks and the following warning messages:
@@ -32,6 +32,12 @@ WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 MACS3 needs at least 100 paired peak
 WARNING @ 18 Dec 2023 00:32:51: [524 MB] #2 Process for pairing-model is terminated!
 ```
 I followed the issue [#353](https://github.com/macs3-project/MACS/issues/353) by adding options as "--nomodel --extsize 200" to get results.
+
+The code is updated as following:
+
+```
+macs3 callpeak -f BED -t C001.2746.tagAlign.gz --broad -g hs -n c1 --broad-cutoff 0.1 --nomodel --extsize 200
+```
 
 All the results from this step are uploaded in the folder `peak calling`.
 
