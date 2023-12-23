@@ -55,9 +55,9 @@ The merged file included 55218 peak regions.
 
 
 ## Step 5: Differential peaks between CRC patients and healthy controls.
-This step is done by an R script called **differential_peaks.R**. The Rdata for this step is also uploaded here.
+This step is done by an R script called **differential_peaks.R**. The Rdata for this step is also uploaded here as **differential_peaks.Rdata**.
 
-First, I merge the peak counts in individual files into the merged peaks, where the individual peak overlaps with the merged peaks. Thus, I generated a count table starting with the merged peaks, followed by counts from cases 1-10 and control 1-10, named count_c1 to count_c10, and count_h1 to count_h10. This object is stored as 'peak1'.
+First, I merge the peak counts in individual files into the merged peaks, where the individual peak overlaps with the merged peaks. Thus, I generated a count table starting with the merged peaks, followed by counts from cases 1-10 and control 1-10, named count_c1 to count_c10, and count_h1 to count_h10. This object is stored as 'peak_region1'.
 
 Then, I calculate the missing value frequency for each merge region and keep those peaks with data from more than 5 cases and 5 controls for downstream analysis. (missing value rate <50% for both cases and controls) However, there are too few outputs (in the object 'peak_region2_Padj'), so I keep all the peaks for differential analysis.
 
@@ -68,5 +68,5 @@ The 'minReplicatesForReplace' option in **DESeq** replaces outliers, and 'cooksC
 I stored the differential peaks with FDR<0.01 as peaks_Padj.csv.
 
 ## Step 6: volcano plot based on DESeq2 results
-I used the results from DESeq2 to generate the volcano plot. The label is identified from peak1 to peak 55218.
+I used the results from DESeq2 to generate the volcano plot. The label is identified from row numbers as peak1 to peak55218. The volcano plots are uploaded named volcano_plot.png.
 
