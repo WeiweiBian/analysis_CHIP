@@ -66,7 +66,7 @@ table(peak_region1$non_na_c,peak_region1$non_na_h)
 
 ## keep peak regions with more than 5 non-missng counts for cases and 5 non-missing counts for controls
 #peak_region2<-peak_region1[peak_region1$non_na_c>=5 & peak_region1$non_na_h>=5,]
-#too few results only, 11 peak regions selected
+#too few results, use all peaks instead
 ## find differential peak counts among cases and controls by DESeq2
 library(DESeq2)
 ?DESeq
