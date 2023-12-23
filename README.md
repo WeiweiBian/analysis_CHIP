@@ -55,7 +55,7 @@ The merged file included 55218 peak regions.
 
 
 ## Step 5: Differential peaks between CRC patients and healthy controls.
-This step is done by an R script called **differential_peaks.R**. The Rdata for this step is also uploaded here as **differential_peaks.Rdata**.
+This step is done by an R script called **differential_peaks.R**. The Rdata for this step is also uploaded here as **differential_peaks.Rdata**. Almost all the objects are in this Rdata file, except the object dds generated from the DESeqDataSetFromMatrix function and DEseq function is too large to be uploaded.
 
 First, I merge the peak counts in individual files into the merged peaks, where the individual peak overlaps with the merged peaks. Thus, I generated a count table starting with the merged peaks, followed by counts from cases 1-10 and control 1-10, named count_c1 to count_c10, and count_h1 to count_h10. This object is stored as 'peak_region1'.
 
@@ -63,7 +63,7 @@ Then, I calculate the missing value frequency for each merge region and keep tho
 
 I converted the count matrix into DESeq2-supported data format and used DESeq2 to find the differential peaks between cases and controls. The first attempt got NA values in adjusted P value, so I checked the DESeq and results function and found two related options.
 
-The 'minReplicatesForReplace' option in **DESeq** replaces outliers, and 'cooksCutoff=FALSE, independentFiltering=FALSE' in **results** function for independent filtering. There are some duplicated rows in our data, so I kept the first option valid and added "cooksCutoff=FALSE, independentFiltering=FALSE" when calling **results** function.
+The 'minReplicatesForReplace' option in **DESeq** for replacing outliers, and 'cooksCutoff=FALSE, independentFiltering=FALSE' in **results** function for independent filtering. There are some duplicated rows in our data, so I kept the first option valid and added "cooksCutoff=FALSE, independentFiltering=FALSE" when calling **results** function.
 
 I stored the differential peaks with FDR<0.01 as peaks_Padj.csv.
 
