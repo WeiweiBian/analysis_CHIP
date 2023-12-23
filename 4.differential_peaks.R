@@ -69,7 +69,6 @@ table(peak_region1$non_na_c,peak_region1$non_na_h)
 #too few results, use all peaks instead
 ## find differential peak counts among cases and controls by DESeq2
 library(DESeq2)
-?DESeq
 cond<-as.data.frame(colnames(peak_reion2)[4:23])
 colnames(cond)<-"sampleID"
 cond$condition<-rep(c("case","control"),each=10)
