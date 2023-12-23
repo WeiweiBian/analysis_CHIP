@@ -49,9 +49,24 @@ I deleted the first several rows in test_peaks.xls and the headers like chr, sta
 The text files for cancer patients are named from c1_peak.txt to c10_peak.txt, and text files for controls are named from h1_peak.txt to h10_peak.txt.
 
 I used the following command to merge peaks as a single union set of peaks.
-`cat c*_peaks.txt h*_peaks.txt | cut -f 1-3 | sort -k1,1 -k2,2n | bedtools merge -i - > merged.bed` to generate a merged bed file. 
+`cat c*_peaks.txt h*_peaks.txt | cut -f 1-3 | sort -k1,1 -k2,2n | bedtools merge -i - > merged.bed` to generate a merged bed file.
 
-The merged bed file is uploaded here, however, there are no overlaps in the peak calling results, therefore the peaks are not collapsed.
+The merged file included 55218 peak regions.
+
 
 ## Step 5: Differential peaks between CRC patients and healthy controls.
-Among the files in the two directories, I only found the BED files instead of the bam files. In the read_counts_bam.csv file, we only have read counts in sample level instead of peak level. I am sorry that I could not complete the differential peaks or volcano plots.
+This step is done by an R script called **differential_peaks.R**. The Rdata for this step is also uploaded here.
+
+First, I merge the peak counts in individual files into the merged peaks, where the individual peak overlaps with the merged peaks. Thus, I generated a count table starting with the merged peaks, followed by counts from cases 1-10 and control 1-10, named count_c1 to count_c10, and count_h1 to count_h10. This object is stored as 'peak1'.
+
+Then, I calculate the missing value frequency for each merge region and keep those peaks with data from more than 5 cases and 5 controls for downstream analysis. (missing value rate <50% for both cases and controls) However, there are too few outputs (in the object 'peak_region2_Padj'), so I keep all the peaks for differential analysis.
+
+I converted the count matrix into DESeq2-supported data format and used DESeq2 to find the differential peaks between cases and controls. The first attempt got NA values in adjusted P value, so I checked the DESeq and results function and found two related options.
+
+The 'minReplicatesForReplace' option in **DESeq** replaces outliers, and 'cooksCutoff=FALSE, independentFiltering=FALSE' in **results** function for independent filtering. There are some duplicated rows in our data, so I kept the first option valid and added "cooksCutoff=FALSE, independentFiltering=FALSE" when calling **results** function.
+
+I stored the differential peaks with FDR<0.01 as peaks_Padj.csv.
+
+## Step 6: volcano plot based on DESeq2 results
+I used the results from DESeq2 to generate the volcano plot. The label is identified from peak1 to peak 55218.
+
